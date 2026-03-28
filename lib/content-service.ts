@@ -1,239 +1,240 @@
+import { supabase } from './supabase'
 import {
-  Gallery,
-  GalleryImage,
-  NewsArticle,
-  Event,
-  PlayerRegistration,
-  StaffMember,
-  AuditLog,
+  Gallery, GalleryImage, NewsArticle,
+  Event, PlayerRegistration, StaffMember, AuditLog,
 } from './types'
 
-// In-memory storage (replace with database)
-let galleries: Gallery[] = []
-let newsArticles: NewsArticle[] = []
-let events: Event[] = []
-let playerRegistrations: PlayerRegistration[] = []
-let staffMembers: StaffMember[] = []
-let auditLogs: AuditLog[] = []
-
-// Gallery Management
-export function createGallery(data: Omit<Gallery, 'id' | 'createdAt' | 'updatedAt'>): Gallery {
-  const gallery: Gallery = {
-    ...data,
-    id: `gallery-${Date.now()}`,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  }
-  galleries.push(gallery)
-  return gallery
-}
-
-export function getGalleries(filters?: { season?: string; category?: string; isPublic?: boolean }): Gallery[] {
-  let result = [...galleries]
-  
-  if (filters?.season) {
-    result = result.filter(g => g.season === filters.season)
-  }
-  if (filters?.category) {
-    result = result.filter(g => g.category === filters.category)
-  }
-  if (filters?.isPublic !== undefined) {
-    result = result.filter(g => g.isPublic === filters.isPublic)
-  }
-  
+// ─── GALLERY ────────────────────────────────────────────
+export async function createGallery(data: Omit<Gallery, 'id' | 'createdAt' | 'updatedAt'>) {
+  const { data: result, error } = await supabase
+    .from('galleries')
+    .insert({ ...data, is_public: data.isPublic })
+    .select().single()
+  if (error) throw new Error(error.message)
   return result
 }
 
-export function updateGallery(id: string, data: Partial<Gallery>): Gallery | null {
-  const index = galleries.findIndex(g => g.id === id)
-  if (index === -1) return null
-  
-  galleries[index] = { ...galleries[index], ...data, updatedAt: new Date() }
-  return galleries[index]
+export async function getGalleries(filters?: { season?: string; category?: string; isPublic?: boolean }) {
+  let query = supabase.from('galleries').select('*, gallery_images(*)')
+  if (filters?.season) query = query.eq('season', filters.season)
+  if (filters?.category) query = query.eq('category', filters.category)
+  if (filters?.isPublic !== undefined) query = query.eq('is_public', filters.isPublic)
+  const { data, error } = await query
+  if (error) throw new Error(error.message)
+  return data || []
 }
 
-export function deleteGallery(id: string): boolean {
-  const index = galleries.findIndex(g => g.id === id)
-  if (index === -1) return false
-  galleries.splice(index, 1)
+export async function updateGallery(id: string, data: Partial<Gallery>) {
+  const { data: result, error } = await supabase
+    .from('galleries').update(data).eq('id', id).select().single()
+  if (error) throw new Error(error.message)
+  return result
+}
+
+export async function deleteGallery(id: string) {
+  const { error } = await supabase.from('galleries').delete().eq('id', id)
+  if (error) throw new Error(error.message)
   return true
 }
 
-// News Management
-export function createNewsArticle(data: Omit<NewsArticle, 'id' | 'createdAt'>): NewsArticle {
-  const article: NewsArticle = {
-    ...data,
-    id: `news-${Date.now()}`,
-    createdAt: new Date(),
-  }
-  newsArticles.push(article)
-  return article
+// ─── NEWS ────────────────────────────────────────────────
+export async function createNewsArticle(data: Omit<NewsArticle, 'id' | 'updatedAt'>) {
+  const { data: result, error } = await supabase
+    .from('news_articles')
+    .insert({
+      title: data.title,
+      content: data.content,
+      excerpt: data.excerpt,
+      featured_image: data.featuredImage,
+      category: data.category,
+      author: data.author,
+      is_published: data.isPublished,
+      published_at: data.publishedAt,
+      scheduled_for: data.scheduledFor,
+    })
+    .select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-export function getNewsArticles(filters?: { category?: string; isPublished?: boolean }): NewsArticle[] {
-  let result = [...newsArticles]
-  
-  if (filters?.category) {
-    result = result.filter(a => a.category === filters.category)
-  }
-  if (filters?.isPublished !== undefined) {
-    result = result.filter(a => a.isPublished === filters.isPublished)
-  }
-  
-  return result.sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+export async function getNewsArticles(filters?: { category?: string; isPublished?: boolean }) {
+  let query = supabase.from('news_articles').select('*').order('published_at', { ascending: false })
+  if (filters?.category) query = query.eq('category', filters.category)
+  if (filters?.isPublished !== undefined) query = query.eq('is_published', filters.isPublished)
+  const { data, error } = await query
+  if (error) throw new Error(error.message)
+  return data || []
 }
 
-export function updateNewsArticle(id: string, data: Partial<NewsArticle>): NewsArticle | null {
-  const index = newsArticles.findIndex(a => a.id === id)
-  if (index === -1) return null
-  
-  newsArticles[index] = { ...newsArticles[index], ...data, updatedAt: new Date() }
-  return newsArticles[index]
+export async function updateNewsArticle(id: string, data: Partial<NewsArticle>) {
+  const { data: result, error } = await supabase
+    .from('news_articles').update(data).eq('id', id).select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-export function deleteNewsArticle(id: string): boolean {
-  const index = newsArticles.findIndex(a => a.id === id)
-  if (index === -1) return false
-  newsArticles.splice(index, 1)
+export async function deleteNewsArticle(id: string) {
+  const { error } = await supabase.from('news_articles').delete().eq('id', id)
+  if (error) throw new Error(error.message)
   return true
 }
 
-// Event Management
-export function createEvent(data: Omit<Event, 'id' | 'createdAt'>): Event {
-  const event: Event = {
-    ...data,
-    id: `event-${Date.now()}`,
-    createdAt: new Date(),
-  }
-  events.push(event)
-  return event
+// ─── EVENTS ──────────────────────────────────────────────
+export async function createEvent(data: Omit<Event, 'id' | 'createdAt'>) {
+  const { data: result, error } = await supabase
+    .from('events')
+    .insert({
+      title: data.title,
+      description: data.description,
+      date: data.date,
+      location: data.location,
+      poster_image: data.posterImage,
+      category: data.category,
+      status: data.status,
+      created_by: data.createdBy,
+    })
+    .select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-export function getEvents(filters?: { category?: string; status?: string }): Event[] {
-  let result = [...events]
-  
-  if (filters?.category) {
-    result = result.filter(e => e.category === filters.category)
-  }
-  if (filters?.status) {
-    result = result.filter(e => e.status === filters.status)
-  }
-  
-  return result.sort((a, b) => a.date.getTime() - b.date.getTime())
+export async function getEvents(filters?: { category?: string; status?: string }) {
+  let query = supabase.from('events').select('*').order('date', { ascending: true })
+  if (filters?.category) query = query.eq('category', filters.category)
+  if (filters?.status) query = query.eq('status', filters.status)
+  const { data, error } = await query
+  if (error) throw new Error(error.message)
+  return data || []
 }
 
-export function updateEvent(id: string, data: Partial<Event>): Event | null {
-  const index = events.findIndex(e => e.id === id)
-  if (index === -1) return null
-  
-  events[index] = { ...events[index], ...data }
-  return events[index]
+export async function updateEvent(id: string, data: Partial<Event>) {
+  const { data: result, error } = await supabase
+    .from('events').update(data).eq('id', id).select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-export function deleteEvent(id: string): boolean {
-  const index = events.findIndex(e => e.id === id)
-  if (index === -1) return false
-  events.splice(index, 1)
+export async function deleteEvent(id: string) {
+  const { error } = await supabase.from('events').delete().eq('id', id)
+  if (error) throw new Error(error.message)
   return true
 }
 
-// Registration Management
-export function createPlayerRegistration(data: Omit<PlayerRegistration, 'id' | 'registeredAt'>): PlayerRegistration {
-  const registration: PlayerRegistration = {
-    ...data,
-    id: `reg-${Date.now()}`,
-    registeredAt: new Date(),
-  }
-  playerRegistrations.push(registration)
-  return registration
+// ─── REGISTRATIONS ───────────────────────────────────────
+export async function createPlayerRegistration(data: Omit<PlayerRegistration, 'id' | 'registeredAt'>) {
+  const { data: result, error } = await supabase
+    .from('player_registrations')
+    .insert({
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      date_of_birth: data.dateOfBirth,
+      category: data.category,
+      program_type: data.programType,
+      status: data.status,
+      notes: data.notes,
+    })
+    .select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-export function getPlayerRegistrations(filters?: { status?: string; category?: string }): PlayerRegistration[] {
-  let result = [...playerRegistrations]
-  
-  if (filters?.status) {
-    result = result.filter(r => r.status === filters.status)
-  }
-  if (filters?.category) {
-    result = result.filter(r => r.category === filters.category)
-  }
-  
-  return result.sort((a, b) => b.registeredAt.getTime() - a.registeredAt.getTime())
+export async function getPlayerRegistrations(filters?: { status?: string; category?: string }) {
+  let query = supabase.from('player_registrations').select('*').order('registered_at', { ascending: false })
+  if (filters?.status) query = query.eq('status', filters.status)
+  if (filters?.category) query = query.eq('category', filters.category)
+  const { data, error } = await query
+  if (error) throw new Error(error.message)
+  return data || []
 }
 
-export function updatePlayerRegistration(id: string, data: Partial<PlayerRegistration>): PlayerRegistration | null {
-  const index = playerRegistrations.findIndex(r => r.id === id)
-  if (index === -1) return null
-  
-  playerRegistrations[index] = { ...playerRegistrations[index], ...data }
-  return playerRegistrations[index]
+export async function updatePlayerRegistration(id: string, data: Partial<PlayerRegistration>) {
+  const { data: result, error } = await supabase
+    .from('player_registrations').update(data).eq('id', id).select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-// Staff Management
-export function createStaffMember(data: Omit<StaffMember, 'id' | 'createdAt' | 'updatedAt'>): StaffMember {
-  const staff: StaffMember = {
-    ...data,
-    id: `staff-${Date.now()}`,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  }
-  staffMembers.push(staff)
-  return staff
+// ─── STAFF ───────────────────────────────────────────────
+export async function createStaffMember(data: Omit<StaffMember, 'id' | 'createdAt' | 'updatedAt'>) {
+  const { data: result, error } = await supabase
+    .from('staff_members')
+    .insert({
+      name: data.name,
+      position: data.position,
+      email: data.email,
+      phone: data.phone,
+      profile_image: data.profileImage,
+      role: data.role,
+    })
+    .select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-export function getStaffMembers(): StaffMember[] {
-  return [...staffMembers]
+export async function getStaffMembers() {
+  const { data, error } = await supabase.from('staff_members').select('*')
+  if (error) throw new Error(error.message)
+  return data || []
 }
 
-export function updateStaffMember(id: string, data: Partial<StaffMember>): StaffMember | null {
-  const index = staffMembers.findIndex(s => s.id === id)
-  if (index === -1) return null
-  
-  staffMembers[index] = { ...staffMembers[index], ...data, updatedAt: new Date() }
-  return staffMembers[index]
+export async function updateStaffMember(id: string, data: Partial<StaffMember>) {
+  const { data: result, error } = await supabase
+    .from('staff_members').update(data).eq('id', id).select().single()
+  if (error) throw new Error(error.message)
+  return result
 }
 
-export function deleteStaffMember(id: string): boolean {
-  const index = staffMembers.findIndex(s => s.id === id)
-  if (index === -1) return false
-  staffMembers.splice(index, 1)
+export async function deleteStaffMember(id: string) {
+  const { error } = await supabase.from('staff_members').delete().eq('id', id)
+  if (error) throw new Error(error.message)
   return true
 }
 
-// Statistics
-export function getStatistics() {
+// ─── STATISTICS ──────────────────────────────────────────
+export async function getStatistics() {
+  const [news, events, registrations, galleries, staff] = await Promise.all([
+    supabase.from('news_articles').select('is_published'),
+    supabase.from('events').select('status'),
+    supabase.from('player_registrations').select('status'),
+    supabase.from('galleries').select('id'),
+    supabase.from('staff_members').select('id'),
+  ])
+
+  const newsData = news.data || []
+  const eventsData = events.data || []
+  const regsData = registrations.data || []
+
   return {
-    totalNewsArticles: newsArticles.length,
-    publishedArticles: newsArticles.filter(a => a.isPublished).length,
-    totalEvents: events.length,
-    activeEvents: events.filter(e => e.status === 'active').length,
-    totalRegistrations: playerRegistrations.length,
-    approvedRegistrations: playerRegistrations.filter(r => r.status === 'approved').length,
-    pendingRegistrations: playerRegistrations.filter(r => r.status === 'pending').length,
-    totalGalleries: galleries.length,
-    totalStaff: staffMembers.length,
+    totalNewsArticles: newsData.length,
+    publishedArticles: newsData.filter(a => a.is_published).length,
+    totalEvents: eventsData.length,
+    activeEvents: eventsData.filter(e => e.status === 'active').length,
+    totalRegistrations: regsData.length,
+    approvedRegistrations: regsData.filter(r => r.status === 'approved').length,
+    pendingRegistrations: regsData.filter(r => r.status === 'pending').length,
+    totalGalleries: galleries.data?.length || 0,
+    totalStaff: staff.data?.length || 0,
   }
 }
 
-// Audit logging
-export function logAction(userId: string, action: string, resource: string, resourceId: string, changes: Record<string, any>): void {
-  const log: AuditLog = {
-    id: `audit-${Date.now()}`,
-    userId,
-    action,
-    resource,
-    resourceId,
-    changes,
-    timestamp: new Date(),
-  }
-  auditLogs.push(log)
-  
-  // Keep only last 1000 logs
-  if (auditLogs.length > 1000) {
-    auditLogs = auditLogs.slice(-1000)
-  }
+// ─── AUDIT LOGS ──────────────────────────────────────────
+export async function logAction(
+  userId: string, action: string, resource: string,
+  resourceId: string, changes: Record<string, any>
+) {
+  await supabase.from('audit_logs').insert({
+    user_id: userId, action, resource,
+    resource_id: resourceId, changes,
+  })
 }
 
-export function getAuditLogs(limit: number = 100): AuditLog[] {
-  return auditLogs.slice(-limit).reverse()
+export async function getAuditLogs(limit = 100) {
+  const { data, error } = await supabase
+    .from('audit_logs').select('*')
+    .order('timestamp', { ascending: false })
+    .limit(limit)
+  if (error) throw new Error(error.message)
+  return data || []
 }
