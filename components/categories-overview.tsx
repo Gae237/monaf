@@ -18,11 +18,13 @@ export default function CategoriesOverview() {
   return (
     <section className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Categories & Training Levels</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Catégories & Niveaux d'entraînement
+        </h2>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-2xl font-bold mb-6 text-primary">Male Categories</h3>
+            <h3 className="text-2xl font-bold mb-6 text-primary">Catégories Masculines</h3>
             <div className="grid grid-cols-2 gap-4">
               {maleCategories.map((cat) => (
                 <div key={cat.name} className={`${cat.color} p-6 rounded-lg text-center card-hover transform`}>
@@ -34,7 +36,7 @@ export default function CategoriesOverview() {
           </div>
 
           <div>
-            <h3 className="text-2xl font-bold mb-6 text-primary">Female Categories</h3>
+            <h3 className="text-2xl font-bold mb-6 text-primary">Catégories Féminines</h3>
             <div className="grid grid-cols-2 gap-4">
               {femaleCategories.map((cat) => (
                 <div key={cat.name} className={`${cat.color} p-6 rounded-lg text-center card-hover transform`}>

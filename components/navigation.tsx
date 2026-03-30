@@ -3,17 +3,18 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import Image from 'next/image'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Programs', href: '/programs' },
-    { label: 'Categories', href: '/categories' },
-    { label: 'Gallery', href: '/gallery' },
-    { label: 'News', href: '/news' },
+    { label: 'Accueil', href: '/' },
+    { label: 'À propos', href: '/about' },
+    { label: 'Programmes', href: '/programs' },
+    { label: 'Catégories', href: '/categories' },
+    { label: 'Galerie', href: '/gallery' },
+    { label: 'Actualités', href: '/news' },
     { label: 'Staff', href: '/staff' },
     { label: 'Contact', href: '/contact' },
   ]
@@ -22,16 +23,22 @@ export default function Navigation() {
     <nav className="sticky top-0 z-50 bg-white border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="bg-primary text-white rounded px-3 py-1 font-bold text-sm md:text-base">
-              OMSA
-            </div>
-            <span className="hidden sm:inline font-bold text-primary text-sm">
-              Olympic Monaf
-            </span>
-          </Link>
+         <Link href="/" className="flex items-center gap-2">
+  <Image
+    src="/logo.jpg"
+    alt="OMSA Logo"
+    width={45}
+    height={45}
+    className="rounded-full object-cover"
+  />
+  <div className="bg-primary text-white rounded px-3 py-1 font-bold text-sm md:text-base">
+    OMSA
+  </div>
+  <span className="hidden sm:inline font-bold text-primary text-sm">
+    Olympic Monaf
+  </span>
+</Link>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex gap-8 items-center">
             {navItems.map((item) => (
               <Link
@@ -42,25 +49,17 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/admin/login"
-              className="ml-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary-light transition-colors text-sm font-medium"
-            >
-              Admin
-            </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden"
-            aria-label="Toggle menu"
+            aria-label="Ouvrir le menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden pb-4 space-y-2">
             {navItems.map((item) => (
@@ -73,13 +72,6 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/admin/login"
-              className="block px-4 py-2 bg-primary text-white rounded hover:bg-primary-light transition-colors font-medium mt-2"
-              onClick={() => setIsOpen(false)}
-            >
-              Admin Panel
-            </Link>
           </div>
         )}
       </div>

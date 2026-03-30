@@ -8,8 +8,15 @@ import {
 export async function createGallery(data: Omit<Gallery, 'id' | 'createdAt' | 'updatedAt'>) {
   const { data: result, error } = await supabase
     .from('galleries')
-    .insert({ ...data, is_public: data.isPublic })
-    .select().single()
+    .insert({
+      title: data.title,
+      description: data.description,
+      season: data.season,
+      category: data.category,
+      is_public: data.isPublic,
+    })
+    .select()
+    .single()
   if (error) throw new Error(error.message)
   return result
 }
@@ -121,7 +128,7 @@ export async function deleteEvent(id: string) {
 }
 
 // ─── REGISTRATIONS ───────────────────────────────────────
-export async function createPlayerRegistration(data: Omit<PlayerRegistration, 'id' | 'registeredAt'>) {
+export async function createPlayerRegistration(data: Omit<PlayerRegistration, 'id' | 'registeredAt'> & { photoUrl?: string }) {
   const { data: result, error } = await supabase
     .from('player_registrations')
     .insert({
@@ -134,6 +141,7 @@ export async function createPlayerRegistration(data: Omit<PlayerRegistration, 'i
       program_type: data.programType,
       status: data.status,
       notes: data.notes,
+      photo_url: data.photoUrl || '',
     })
     .select().single()
   if (error) throw new Error(error.message)

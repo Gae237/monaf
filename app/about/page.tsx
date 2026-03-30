@@ -1,39 +1,35 @@
-import Image from 'next/image'
-
 export default function About() {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
       <div className="hero-section py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 text-center text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">About OMSA</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">À propos de l'OMSA</h1>
           <p className="text-xl text-gray-100">
-            Shaping the future of Cameroonian football since 2021
+            Façonner l'avenir du football camerounais depuis 2021
           </p>
         </div>
       </div>
 
-      {/* Content */}
       <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 space-y-16">
-        {/* Overview */}
+        {/* Présentation */}
         <section>
-          <h2 className="text-3xl font-bold mb-6">Academy Overview</h2>
+          <h2 className="text-3xl font-bold mb-6">Présentation de l'Académie</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-4 text-muted-dark">
               <p>
-                Olympic Monaf Sport Academy (OMSA) was founded on July 28, 2021, with a vision to transform young Cameroonian talent into world-class footballers while maintaining academic excellence.
+                L'Olympic Monaf Sport Academy (OMSA) a été fondée le 28 juillet 2021 avec la vision de transformer les jeunes talents camerounais en footballeurs de classe mondiale, tout en maintenant l'excellence académique.
               </p>
               <p>
-                Located in Olembe, Yaoundé, our academy combines professional football training with rigorous academic programs, creating well-rounded athletes and citizens.
+                Située à Olembe, Yaoundé, notre académie combine un entraînement professionnel de football avec des programmes académiques rigoureux, formant des athlètes complets et des citoyens responsables.
               </p>
               <p>
-                We offer flexible programs including Sport-Études (integrated sports and academics), Internes (boarding), and Externes (day program) for students aged 7-21.
+                Nous proposons des programmes flexibles incluant le Sport-Études (sports et académique intégrés), les Internes (internat) et les Externes (programme journalier) pour les étudiants âgés de 7 à 21 ans.
               </p>
             </div>
-            <div className="bg-gray-300 h-96 rounded-lg overflow-hidden">
-              <img 
-                src="/modern-football-academy-building.jpg"
-                alt="Academy Building"
+            <div className="h-96 rounded-lg overflow-hidden">
+              <img
+                src="/academy.jpg"
+                alt="Académie OMSA"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -43,28 +39,28 @@ export default function About() {
         {/* Mission & Vision */}
         <section className="grid md:grid-cols-2 gap-12">
           <div className="bg-primary text-white p-8 rounded-lg">
-            <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
+            <h3 className="text-2xl font-bold mb-4">Notre Mission</h3>
             <p className="leading-relaxed">
-              To form young athletes through comprehensive football development and school education, creating disciplined, talented individuals who excel both on the field and in the classroom.
+              Former de jeunes athlètes grâce à un développement complet du football et une éducation scolaire, créant des individus disciplinés et talentueux qui excellent sur le terrain comme en classe.
             </p>
           </div>
           <div className="bg-accent text-white p-8 rounded-lg">
-            <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+            <h3 className="text-2xl font-bold mb-4">Notre Vision</h3>
             <p className="leading-relaxed">
-              To become the reference institution in football training in Cameroon and Africa, producing elite athletes who represent their country with pride and professionalism.
+              Devenir l'institution de référence en matière de formation footballistique au Cameroun et en Afrique, produisant des athlètes d'élite qui représentent leur pays avec fierté et professionnalisme.
             </p>
           </div>
         </section>
 
-        {/* Admission Requirements */}
+        {/* Conditions d'admission */}
         <section>
-          <h2 className="text-3xl font-bold mb-8">Admission Requirements</h2>
+          <h2 className="text-3xl font-bold mb-8">Conditions d'admission</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { title: 'Age Range', desc: 'Must be between 7 and 21 years old' },
-              { title: 'Physical Fitness', desc: 'Must be physically fit and healthy' },
-              { title: 'Motivation', desc: 'Must demonstrate genuine interest in football and academics' },
-              { title: 'Commitment', desc: 'Voluntary participation with dedication to training' },
+              { title: 'Tranche d\'âge', desc: 'Doit avoir entre 7 et 21 ans' },
+              { title: 'Condition physique', desc: 'Doit être en bonne santé et physiquement apte' },
+              { title: 'Motivation', desc: 'Doit démontrer un intérêt sincère pour le football et les études' },
+              { title: 'Engagement', desc: 'Participation volontaire avec une dédicace à l\'entraînement' },
             ].map((req) => (
               <div key={req.title} className="bg-muted p-6 rounded-lg border border-border">
                 <h3 className="font-bold text-lg mb-2 text-primary">{req.title}</h3>
@@ -74,21 +70,21 @@ export default function About() {
           </div>
         </section>
 
-        {/* Key Facts */}
+        {/* Chiffres clés */}
         <section className="bg-muted p-12 rounded-lg">
-          <h2 className="text-3xl font-bold mb-8">Key Information</h2>
+          <h2 className="text-3xl font-bold mb-8">Informations clés</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="text-4xl font-bold text-primary mb-2">2021</div>
-              <p className="text-muted-dark font-semibold">Founded: July 28, 2021</p>
+              <p className="text-muted-dark font-semibold">Fondée le 28 juillet 2021</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-primary mb-2">7-21</div>
-              <p className="text-muted-dark font-semibold">Age Range Accepted</p>
+              <p className="text-muted-dark font-semibold">Tranche d'âge acceptée</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-primary mb-2">3</div>
-              <p className="text-muted-dark font-semibold">Program Options</p>
+              <p className="text-muted-dark font-semibold">Options de programmes</p>
             </div>
           </div>
         </section>

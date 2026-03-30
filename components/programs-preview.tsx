@@ -5,25 +5,25 @@ export default function ProgramsPreview() {
     <section className="py-16 md:py-24 bg-muted">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Programs</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Nos Programmes</h2>
           <p className="text-muted-dark max-w-2xl mx-auto">
-            Comprehensive football development with academic achievement and personal growth
+            Développement complet du football avec réussite académique et croissance personnelle
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {[
             {
-              title: 'Academic Schedule',
-              items: ['Morning classes', 'Afternoon training', 'Evening study', 'Weekend matches']
+              title: 'Emploi du temps académique',
+              items: ['Cours le matin', "Entraînement l'après-midi", 'Étude le soir', 'Matchs le week-end']
             },
             {
-              title: 'Training Focus',
-              items: ['Technical skills', 'Tactical awareness', 'Physical conditioning', 'Mental development']
+              title: "Focus entraînement",
+              items: ['Compétences techniques', 'Conscience tactique', 'Conditionnement physique', 'Développement mental']
             },
             {
-              title: 'Support Services',
-              items: ['Nutritional guidance', 'Medical care', 'Psychological support', 'Academic tutoring']
+              title: 'Services de soutien',
+              items: ['Conseils nutritionnels', 'Soins médicaux', 'Soutien psychologique', 'Tutorat académique']
             }
           ].map((item) => (
             <div key={item.title} className="bg-white p-8 rounded-lg border border-border card-hover">
@@ -42,7 +42,7 @@ export default function ProgramsPreview() {
 
         <div className="text-center">
           <Link href="/programs" className="btn-primary inline-block">
-            View Full Programs
+            Voir tous les programmes
           </Link>
         </div>
       </div>

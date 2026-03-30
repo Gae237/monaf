@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { logout } from '@/lib/auth-service'
 import { type AdminUser } from '@/lib/types'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 
 interface AdminNavigationProps {
   user: AdminUser
@@ -22,13 +23,13 @@ export default function AdminNavigation({ user }: AdminNavigationProps) {
   }
 
   const navItems = [
-    { href: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
-    { href: '/admin/gallery', label: 'Gallery', icon: '📸', roles: ['admin', 'super-admin', 'editor'] },
-    { href: '/admin/news', label: 'News & Articles', icon: '📰', roles: ['admin', 'super-admin', 'editor'] },
-    { href: '/admin/events', label: 'Events', icon: '🎯', roles: ['admin', 'super-admin'] },
-    { href: '/admin/registrations', label: 'Registrations', icon: '👥', roles: ['admin', 'super-admin'] },
+    { href: '/admin/dashboard', label: 'Tableau de bord', icon: '📊' },
+    { href: '/admin/gallery', label: 'Galerie', icon: '📸', roles: ['admin', 'super-admin', 'editor'] },
+    { href: '/admin/news', label: 'Actualités', icon: '📰', roles: ['admin', 'super-admin', 'editor'] },
+    { href: '/admin/events', label: 'Événements', icon: '🎯', roles: ['admin', 'super-admin'] },
+    { href: '/admin/registrations', label: 'Inscriptions', icon: '👥', roles: ['admin', 'super-admin'] },
     { href: '/admin/staff', label: 'Staff', icon: '👔', roles: ['admin', 'super-admin'] },
-    { href: '/admin/users', label: 'Users', icon: '👤', roles: ['super-admin'] },
+    { href: '/admin/users', label: 'Utilisateurs', icon: '👤', roles: ['super-admin'] },
   ]
 
   const isActive = (href: string) => pathname === href
@@ -40,7 +41,6 @@ export default function AdminNavigation({ user }: AdminNavigationProps) {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
         className="md:hidden fixed top-4 left-4 z-50 p-2 bg-primary text-white rounded"
@@ -48,7 +48,6 @@ export default function AdminNavigation({ user }: AdminNavigationProps) {
         {mobileOpen ? '✕' : '☰'}
       </button>
 
-      {/* Sidebar */}
       <aside
         className={`
           fixed md:static top-0 left-0 h-screen w-64 bg-primary text-white p-6 shadow-lg
@@ -56,13 +55,22 @@ export default function AdminNavigation({ user }: AdminNavigationProps) {
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         `}
       >
-        <div className="mb-8 mt-12 md:mt-0">
-          <h1 className="text-2xl font-bold">OMSA</h1>
-          <p className="text-sm text-blue-100">Admin Panel</p>
-        </div>
+        <div className="mb-8 mt-12 md:mt-0 flex items-center gap-3">
+  <Image
+    src="/logo.jpg"
+    alt="OMSA Logo"
+    width={45}
+    height={45}
+    className="rounded-full object-cover"
+  />
+  <div>
+    <h1 className="text-2xl font-bold">OMSA</h1>
+    <p className="text-sm text-blue-100">Panneau Admin</p>
+  </div>
+</div>
 
         <div className="mb-8 p-4 bg-blue-700 rounded-lg">
-          <p className="text-xs text-blue-100 mb-1">Logged in as</p>
+          <p className="text-xs text-blue-100 mb-1">Connecté en tant que</p>
           <p className="font-semibold text-sm">{user.name}</p>
           <p className="text-xs text-blue-100 capitalize">{user.role.replace('-', ' ')}</p>
         </div>
@@ -90,7 +98,7 @@ export default function AdminNavigation({ user }: AdminNavigationProps) {
         <div className="border-t border-blue-500 pt-4 space-y-3">
           <Link href="/">
             <Button variant="outline" className="w-full text-white border-white hover:bg-blue-700">
-              View Website
+              Voir le site
             </Button>
           </Link>
           <Button
@@ -98,12 +106,11 @@ export default function AdminNavigation({ user }: AdminNavigationProps) {
             variant="outline"
             className="w-full text-white border-white hover:bg-blue-700"
           >
-            Logout
+            Se déconnecter
           </Button>
         </div>
       </aside>
 
-      {/* Mobile Overlay */}
       {mobileOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"

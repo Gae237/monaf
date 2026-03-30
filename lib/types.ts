@@ -70,18 +70,20 @@ export interface Event {
   createdAt: Date
 }
 
+// Type pour les données retournées par Supabase (snake_case)
 export interface PlayerRegistration {
   id: string
   firstName: string
   lastName: string
   email: string
   phone: string
-  dateOfBirth: Date
+  dateOfBirth: string
   category: string
   programType: string
   status: 'pending' | 'approved' | 'rejected'
-  registeredAt: Date
+  registeredAt: string
   notes?: string
+  photo_url?: string
 }
 
 export interface StaffMember {

@@ -100,3 +100,19 @@ export async function getAllUsers(): Promise<AdminUser[]> {
   const { data } = await supabase.from('admin_users').select('*')
   return (data || []).map(u => ({ ...u, isActive: u.is_active, createdAt: new Date(u.created_at) }))
 }
+
+export async function updateUserRole(email: string, newRole: UserRole): Promise<void> {
+  const { error } = await supabase
+    .from('admin_users')
+    .update({ role: newRole })
+    .eq('email', email)
+  if (error) throw new Error(error.message)
+}
+
+export async function deactivateUser(email: string): Promise<void> {
+  const { error } = await supabase
+    .from('admin_users')
+    .update({ is_active: false })
+    .eq('email', email)
+  if (error) throw new Error(error.message)
+}

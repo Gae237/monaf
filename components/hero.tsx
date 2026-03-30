@@ -17,19 +17,19 @@ export default function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/about" className="btn-primary">
-              Discover the Academy
+              Découvrir l'Académie
             </Link>
             <Link href="/categories" className="btn-secondary">
-              Register Now
+              S'inscrire maintenant
             </Link>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mt-16">
           {[
-            { title: 'Sport-Études', desc: 'Academic excellence combined with elite football training' },
-            { title: 'Internes', desc: 'Full boarding program with 24/7 professional supervision' },
-            { title: 'Externes', desc: 'Day program with flexible schedule for active students' },
+            { title: 'Sport-Études', desc: "Excellence académique combinée à un entraînement de football d'élite" },
+            { title: 'Internes', desc: "Programme d'internat complet avec supervision professionnelle 24h/24" },
+            { title: 'Externes', desc: "Programme journalier avec horaires flexibles pour étudiants actifs" },
           ].map((item) => (
             <div key={item.title} className="bg-white/10 backdrop-blur rounded-lg p-6 text-white border border-white/20 card-hover">
               <h3 className="font-bold text-lg mb-2">{item.title}</h3>

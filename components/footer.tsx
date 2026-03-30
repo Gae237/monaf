@@ -14,22 +14,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4">Liens rapides</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-accent transition">About</Link></li>
-              <li><Link href="/programs" className="hover:text-accent transition">Programs</Link></li>
-              <li><Link href="/gallery" className="hover:text-accent transition">Gallery</Link></li>
-              <li><Link href="/news" className="hover:text-accent transition">News</Link></li>
+              <li><Link href="/about" className="hover:text-accent transition">À propos</Link></li>
+              <li><Link href="/programs" className="hover:text-accent transition">Programmes</Link></li>
+              <li><Link href="/gallery" className="hover:text-accent transition">Galerie</Link></li>
+              <li><Link href="/news" className="hover:text-accent transition">Actualités</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Categories</h4>
+            <h4 className="font-semibold mb-4">Catégories</h4>
             <ul className="space-y-1 text-sm">
-              <li>U8 - U18+ (Male)</li>
-              <li>U13 - U18+ (Female)</li>
+              <li>U8 - U18+ (Masculin)</li>
+              <li>U13 - U18+ (Féminin)</li>
               <li>Sport-Études</li>
-              <li>Boarding & Day Programs</li>
+              <li>Internes & Externes</li>
             </ul>
           </div>
 
@@ -46,15 +46,15 @@ export default function Footer() {
               </div>
               <a href="https://facebook.com" className="flex items-center gap-2 hover:text-accent">
                 <Facebook size={16} />
-                <span>OMSA on Facebook</span>
+                <span>OMSA sur Facebook</span>
               </a>
             </div>
           </div>
         </div>
 
         <div className="border-t border-blue-400 pt-6 text-center text-sm text-gray-100">
-          <p>&copy; 2025 Olympic Monaf Sport Academy. All rights reserved.</p>
-          <p>Located in Olembe, Yaoundé, Cameroon | Founded July 28, 2021</p>
+          <p>&copy; 2025 Olympic Monaf Sport Academy. Tous droits réservés.</p>
+          <p>Situé à Olembe, Yaoundé, Cameroun | Fondé le 28 juillet 2021</p>
         </div>
       </div>
     </footer>

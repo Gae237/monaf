@@ -1,148 +1,147 @@
 export default function Programs() {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
       <div className="hero-section py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 text-center text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Programs</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Nos Programmes</h1>
           <p className="text-xl text-gray-100">
-            Comprehensive development combining football excellence with academic achievement
+            Développement complet alliant excellence footballistique et réussite académique
           </p>
         </div>
       </div>
 
-      {/* Programs */}
       <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 space-y-16">
+
         {/* Sport-Études */}
         <section className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-primary">Sport-Études Program</h2>
+            <h2 className="text-3xl font-bold text-primary">Programme Sport-Études</h2>
             <div className="space-y-4 text-muted-dark">
               <p>
-                Our flagship program integrates elite football training with rigorous academic curriculum.
+                Notre programme phare intègre un entraînement football d'élite avec un cursus académique rigoureux.
               </p>
               <div>
-                <h3 className="font-bold mb-2">Academic Schedule</h3>
+                <h3 className="font-bold mb-2">Emploi du temps académique</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Morning classes (8 AM - 12 PM)</li>
-                  <li>• Afternoon training (2 PM - 5 PM)</li>
-                  <li>• Evening study & support (6 PM - 8 PM)</li>
+                  <li>• Cours le matin (8h - 12h)</li>
+                  <li>• Entraînement l'après-midi (14h - 17h)</li>
+                  <li>• Étude et soutien le soir (18h - 20h)</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-bold mb-2">Training Focus</h3>
+                <h3 className="font-bold mb-2">Focus entraînement</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Technical skill development</li>
-                  <li>• Tactical understanding</li>
-                  <li>• Physical conditioning</li>
-                  <li>• Mental preparation</li>
+                  <li>• Développement des compétences techniques</li>
+                  <li>• Compréhension tactique</li>
+                  <li>• Conditionnement physique</li>
+                  <li>• Préparation mentale</li>
                 </ul>
               </div>
             </div>
           </div>
-          <div className="bg-gray-300 h-96 rounded-lg overflow-hidden">
-            <img 
-              src="/football-training.jpg"
+          <div className="h-96 rounded-lg overflow-hidden">
+            <img
+              src="/sport-etudes.jpg"
               alt="Sport-Études"
               className="w-full h-full object-cover"
             />
           </div>
         </section>
 
-        {/* Internal Program */}
+        {/* Internes */}
         <section className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="bg-gray-300 h-96 rounded-lg overflow-hidden">
-            <img 
-              src="/boarding-academy-dormitory.jpg"
-              alt="Boarding"
+          <div className="h-96 rounded-lg overflow-hidden">
+            <img
+              src="/boarding.jpg"
+              alt="Programme Internat"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-primary">Internes (Boarding Program)</h2>
+            <h2 className="text-3xl font-bold text-primary">Internes (Programme d'Internat)</h2>
             <div className="space-y-4 text-muted-dark">
               <p>
-                Our residential program provides 24/7 professional supervision with comprehensive support services.
+                Notre programme résidentiel offre une supervision professionnelle 24h/24 avec des services de soutien complets.
               </p>
               <div>
-                <h3 className="font-bold mb-2">Daily Structure</h3>
+                <h3 className="font-bold mb-2">Structure journalière</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• School (full day)</li>
-                  <li>• Professional training</li>
-                  <li>• Meals & nutrition</li>
-                  <li>• Recovery & rest</li>
+                  <li>• École (journée complète)</li>
+                  <li>• Entraînement professionnel</li>
+                  <li>• Repas et nutrition</li>
+                  <li>• Récupération et repos</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-bold mb-2">Support Services</h3>
+                <h3 className="font-bold mb-2">Services de soutien</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Medical staff on-site</li>
-                  <li>• Psychological support</li>
-                  <li>• Nutritional guidance</li>
-                  <li>• Disciplinary oversight</li>
+                  <li>• Personnel médical sur place</li>
+                  <li>• Soutien psychologique</li>
+                  <li>• Conseils nutritionnels</li>
+                  <li>• Encadrement disciplinaire</li>
                 </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* External Program */}
+        {/* Externes */}
         <section className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-primary">Externes (Day Program)</h2>
+            <h2 className="text-3xl font-bold text-primary">Externes (Programme Journalier)</h2>
             <div className="space-y-4 text-muted-dark">
               <p>
-                Flexible day program designed for students who prefer to live at home while receiving professional football training.
+                Programme journalier flexible conçu pour les élèves qui préfèrent vivre chez eux tout en bénéficiant d'un entraînement football professionnel.
               </p>
               <div>
-                <h3 className="font-bold mb-2">Schedule</h3>
+                <h3 className="font-bold mb-2">Horaires</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Afternoon training sessions</li>
-                  <li>• Evening football training</li>
-                  <li>• Weekend matches & tournaments</li>
-                  <li>• Flexible timing for school</li>
+                  <li>• Séances d'entraînement l'après-midi</li>
+                  <li>• Entraînement football le soir</li>
+                  <li>• Matchs et tournois le week-end</li>
+                  <li>• Horaires flexibles pour l'école</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-bold mb-2">Benefits</h3>
+                <h3 className="font-bold mb-2">Avantages</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Home-based education</li>
-                  <li>• Professional coaching</li>
-                  <li>• Tournament participation</li>
-                  <li>• Personal development</li>
+                  <li>• Scolarité à domicile</li>
+                  <li>• Coaching professionnel</li>
+                  <li>• Participation aux tournois</li>
+                  <li>• Développement personnel</li>
                 </ul>
               </div>
             </div>
           </div>
-          <div className="bg-gray-300 h-96 rounded-lg overflow-hidden">
-            <img 
-              src="/football-player-training.jpg"
-              alt="Day Program"
+          <div className="h-96 rounded-lg overflow-hidden">
+            <img
+              src="/day-program.jpg"
+              alt="Programme Journalier"
               className="w-full h-full object-cover"
             />
           </div>
         </section>
 
-        {/* Highlights */}
+        {/* Points forts */}
         <section className="bg-muted p-12 rounded-lg">
-          <h2 className="text-3xl font-bold mb-8">Program Highlights</h2>
+          <h2 className="text-3xl font-bold mb-8">Points forts des programmes</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-bold text-lg text-primary mb-3">Weekend Tournaments</h3>
+              <h3 className="font-bold text-lg text-primary mb-3">Tournois du week-end</h3>
               <p className="text-sm text-muted-dark">
-                Regular competitive tournaments to develop match experience and tactical awareness.
+                Tournois compétitifs réguliers pour développer l'expérience en match et la conscience tactique.
               </p>
             </div>
             <div>
-              <h3 className="font-bold text-lg text-primary mb-3">Discipline & Education</h3>
+              <h3 className="font-bold text-lg text-primary mb-3">Discipline & Éducation</h3>
               <p className="text-sm text-muted-dark">
-                Strong emphasis on school monitoring, discipline, and educational support for all students.
+                Accent fort sur le suivi scolaire, la discipline et le soutien éducatif pour tous les élèves.
               </p>
             </div>
             <div>
-              <h3 className="font-bold text-lg text-primary mb-3">Personal Development</h3>
+              <h3 className="font-bold text-lg text-primary mb-3">Développement personnel</h3>
               <p className="text-sm text-muted-dark">
-                Holistic development focusing on character building and life skills alongside football.
+                Développement holistique axé sur la construction du caractère et les compétences de vie en parallèle du football.
               </p>
             </div>
           </div>
