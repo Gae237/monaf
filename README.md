@@ -93,12 +93,8 @@ A comprehensive full-stack web application for the Olympic Monaf Sport Academy i
    \`\`\`
 5. Open [http://localhost:3000](http://localhost:3000)
 
-### Default Admin Credentials
-
-\`\`\`
-Email: admin@omsa.com
-Password: Admin@123456
-\`\`\`
+### Admin Access
+Contact the development team for admin credentials.
 
 **Important**: Change these credentials immediately in production.
 
