@@ -19,7 +19,7 @@ export default function StaffManagement() {
   const [photoFile, setPhotoFile] = useState<File | null>(null)
   const [photoPreview, setPhotoPreview] = useState<string>('')
   const [formData, setFormData] = useState({
-    name: '', position: '', email: '', phone: '', role: 'Coach',
+    name: '', position: '', email: '', phone: '', role: '',
   })
 
   const isSuperAdmin = user ? canEdit(user.role, 'staff') : false
@@ -85,7 +85,7 @@ export default function StaffManagement() {
       }
 
       await loadStaff()
-      setFormData({ name: '', position: '', email: '', phone: '', role: 'Coach' })
+      setFormData({ name: '', position: '', email: '', phone: '', role: '' })
       setPhotoFile(null)
       setPhotoPreview('')
       setShowForm(false)
@@ -130,7 +130,7 @@ export default function StaffManagement() {
         {isSuperAdmin && (
           <Button onClick={() => {
             setEditingId(null)
-            setFormData({ name: '', position: '', email: '', phone: '', role: 'Coach' })
+            setFormData({ name: '', position: '', email: '', phone: '', role: '' })
             setPhotoFile(null)
             setPhotoPreview('')
             setShowForm(!showForm)
@@ -190,13 +190,14 @@ export default function StaffManagement() {
               <input type="text" placeholder="Poste/Titre" value={formData.position}
                 onChange={(e) => setFormData({ ...formData, position: e.target.value })}
                 className="px-4 py-2 border border-border rounded" required />
-              <select value={formData.role}
+              <input
+                type="text"
+                placeholder="Rôle (ex: Coach, Médecin, Directeur...)"
+                value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="px-4 py-2 border border-border rounded">
-                {['Coach','Assistant Coach','Physio','Manager','Admin'].map(r => (
-                  <option key={r}>{r}</option>
-                ))}
-              </select>
+                className="px-4 py-2 border border-border rounded"
+                required
+                />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

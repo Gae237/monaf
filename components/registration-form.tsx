@@ -79,7 +79,7 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
   lastName: formData.childName.split(' ').slice(1).join(' ') || '',
   email: formData.email,
   phone: formData.phoneNumber,
-  dateOfBirth: new Date(formData.dateOfBirth),
+  dateOfBirth: formData.dateOfBirth,
   category: formData.category,
   programType: formData.programType,
   status: 'pending',
